@@ -1,7 +1,10 @@
 body {
+  font-family: 'Open Sans',
+  sans-serif;
   background: #222;
+  margin: 1vw;
   color: #eee;
   text-align: center;
   font-size: 25px;
-  font-size: 2.5vw;
+  font-size: 3vw;
 }

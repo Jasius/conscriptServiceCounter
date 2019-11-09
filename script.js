@@ -1,56 +1,38 @@
+function fullDateDiff(serviceEndDate, currentDate) {
+  const years = serviceEndDate.diff(currentDate, 'year');
+  currentDate.add(years, 'years');
+  const months = serviceEndDate.diff(currentDate, 'months');
+  currentDate.add(months, 'months');
+  const days = serviceEndDate.diff(currentDate, 'days');
+  currentDate.add(days, 'days');
+  const hours = serviceEndDate.diff(currentDate, 'hours');
+  currentDate.add(hours, 'hours');
+  const minutes = serviceEndDate.diff(currentDate, 'minutes');
+  currentDate.add(minutes, 'minutes');
+  const seconds = serviceEndDate.diff(currentDate, 'seconds');
+  return {
+    years,
+    months,
+    days,
+    hours,
+    minutes,
+    seconds
+  };
+}
+
+let prepDate = fullDateDiff(moment([2020, 03, 14]), moment());
+setInterval(function () {
+  timeSheets(moment(), moment([2020, 03, 14]));
+  prepDate = fullDateDiff(moment([2020, 03, 14]), moment());
+}, 1000);
+
 const timeSheets = (currentDate, serviceEndDate) => {
-  let b = moment([2020, 03, 14]),
-    timeTable = `Conscript service ends in
-${serviceEndDate.diff(currentDate, "months")} months</br>
+  timeTable = `Conscript service ends in
+${prepDate.months} months ${prepDate.days} days ${prepDate.hours} hours ${prepDate.minutes} minutes ${prepDate.seconds} seconds</br>
 or</br>
 ${serviceEndDate.diff(currentDate, "weeks")} weeks</br>
 or</br>
-${serviceEndDate.diff(currentDate, "days")} days</br>
-or </br>
-${serviceEndDate.diff(currentDate, "hours")} hours</br>
-or</br>
-${serviceEndDate.diff(currentDate, "minutes")} minutes</br>
-or</br>
-${serviceEndDate.diff(currentDate, "seconds")} seconds
+${serviceEndDate.diff(currentDate, "days")} days
 `;
-  return (document.getElementById("timesheetDiv").innerHTML = timeTable);
+  return document.getElementById("timesheetDiv").innerHTML = timeTable;
 };
-setInterval(function() {
-  timeSheets(moment(), moment([2020, 03, 14]));
-}, 1000);
-
-  function diffYMDHMS(date1, date2) {
-
-   let years = date1.diff(date2, 'year');
-   date2.add(years, 'years');
-
-   let months = date1.diff(date2, 'months');
-   date2.add(months, 'months');
-
-   let days = date1.diff(date2, 'days');
-   date2.add(days, 'days');
-
-   let hours = date1.diff(date2, 'hours');
-   date2.add(hours, 'hours');
-
-   let minutes = date1.diff(date2, 'minutes');
-   date2.add(minutes, 'minutes');
-
-   let seconds = date1.diff(date2, 'seconds');
-
-   console.info(`${years} years ${months} months ${days}   days  ${hours}   
-     ${hours}   minutes
-     ${minutes}   seconds
-     ${seconds}`)
-
-   return {
-     years,
-     months,
-     days,
-     hours,
-     minutes,
-     seconds
-   };
- }
-
- console.info(diffYMDHMS( moment([2020, 03, 14]), moment()))
